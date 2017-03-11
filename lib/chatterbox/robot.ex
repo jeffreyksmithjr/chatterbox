@@ -6,6 +6,8 @@ defmodule Chatterbox.Robot do
       :yes = :global.register_name(name, self())
     end
 
+    Chatterbox.Knowledge.start_link()
+
     {:ok, state}
   end
 

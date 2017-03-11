@@ -1,10 +1,10 @@
-defmodule Chatterbox.Rules do
+defmodule Chatterbox.Reflexes do
 
   use Hedwig.Responder
 
   @answers ["I like ", "I don't like "]
 
-  def answer(thing) do
+  defp answer(thing) do
     sentiment = random(@answers)
     Enum.join([sentiment, thing, "!"])
   end
