@@ -7,6 +7,7 @@ defmodule Chatterbox.Robot do
     end
 
     Chatterbox.Knowledge.start_link()
+    Chatterbox.Learning.start_link()
 
     {:ok, state}
   end

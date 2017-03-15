@@ -2,18 +2,20 @@ defmodule Chatterbox.Knowledge do
 
   use Hedwig.Responder
 
+  import Chatterbox.Speech, only: [speak_and_type: 2]
+
   def start_link do
     Agent.start_link(fn -> MapSet.new end, name: :knowledge)
   end
 
-  defp liked?(key) do
+  defp liked?(thing) do
     knowledge = Process.whereis(:knowledge)
-    Agent.get(knowledge, &MapSet.member?(&1, key))
+    Agent.get(knowledge, &MapSet.member?(&1, thing))
   end
 
-  def put(key) do
+  defp put(thing) do
     knowledge = Process.whereis(:knowledge)
-    Agent.update(knowledge, &MapSet.put(&1, key))
+    Agent.update(knowledge, &MapSet.put(&1, thing))
   end
 
   defp speak_likes(sentiment, thing) do
@@ -32,13 +34,13 @@ defmodule Chatterbox.Knowledge do
   end
 
   hear ~r/Do you really like (\w+)\?/i, msg do
-    reply msg, answer(msg.matches[1])
+    speak_and_type(msg, answer(msg.matches[1]))
   end
 
   hear ~r/You should really like (\w+)\./i, msg do
     thing = msg.matches[1]
     put(thing)
-    reply msg, speak_acknowledgment(thing)
+    speak_and_type(msg, speak_acknowledgment(thing))
   end
 
 end

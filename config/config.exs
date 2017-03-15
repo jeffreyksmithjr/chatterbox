@@ -10,7 +10,8 @@ config :chatterbox, Chatterbox.Robot,
     {Hedwig.Responders.Help, []},
     {Hedwig.Responders.Ping, []},
     {Chatterbox.Reflexes, []},
-    {Chatterbox.Knowledge, []}
+    {Chatterbox.Knowledge, []},
+    {Chatterbox.Learning, []}
   ]
 
 

@@ -11,7 +11,6 @@ defmodule Chatterbox do
       # Starts a worker by calling: Chatterbox.Worker.start_link(arg1, arg2, arg3)
       # worker(Chatterbox.Worker, [arg1, arg2, arg3]),
       worker(Chatterbox.Robot, [])
-      # worker(Chatterbox.Knowledge, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
